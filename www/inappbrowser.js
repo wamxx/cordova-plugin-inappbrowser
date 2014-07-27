@@ -29,6 +29,7 @@ function InAppBrowser() {
         'loadstart': channel.create('loadstart'),
         'loadstop' : channel.create('loadstop'),
         'loaderror' : channel.create('loaderror'),
+        'wish' : channel.create('wish'),
         'exit' : channel.create('exit')
    };
 }
@@ -42,6 +43,9 @@ InAppBrowser.prototype = {
     close: function (eventname) {
         exec(null, null, "InAppBrowser", "close", []);
     },
+    waitMessageError: function (eventname) {
+            exec(null, null, "InAppBrowser", "waitMessageError", []);
+        },
     show: function (eventname) {
       exec(null, null, "InAppBrowser", "show", []);
     },
@@ -55,6 +59,8 @@ InAppBrowser.prototype = {
             this.channels[eventname].unsubscribe(f);
         }
     },
+
+
 
     executeScript: function(injectDetails, cb) {
         if (injectDetails.code) {

@@ -31,8 +31,13 @@
 @property (nonatomic, retain) CDVInAppBrowserViewController* inAppBrowserViewController;
 @property (nonatomic, copy) NSString* callbackId;
 @property (nonatomic, copy) NSRegularExpression *callbackIdPattern;
+@property (nonatomic, copy) NSString* wishbuttoncaption;
+@property (nonatomic, copy) NSString* wishwaitmessage;
+@property (nonatomic, copy) NSString* wisherrortitle;
+@property (nonatomic, copy) NSString* wisherrormessage;
 
 - (void)open:(CDVInvokedUrlCommand*)command;
+- (void)waitMessageError:(CDVInvokedUrlCommand*)command;
 - (void)close:(CDVInvokedUrlCommand*)command;
 - (void)injectScriptCode:(CDVInvokedUrlCommand*)command;
 - (void)show:(CDVInvokedUrlCommand*)command;
@@ -44,6 +49,10 @@
 @property (nonatomic, assign) BOOL location;
 @property (nonatomic, assign) BOOL toolbar;
 @property (nonatomic, copy) NSString* closebuttoncaption;
+@property (nonatomic, copy) NSString* wishbuttoncaption;
+@property (nonatomic, copy) NSString* wishwaitmessage;
+@property (nonatomic, copy) NSString* wisherrortitle;
+@property (nonatomic, copy) NSString* wisherrormessage;
 @property (nonatomic, copy) NSString* toolbarposition;
 @property (nonatomic, assign) BOOL clearcache;
 @property (nonatomic, assign) BOOL clearsessioncache;
@@ -63,7 +72,7 @@
 
 @end
 
-@interface CDVInAppBrowserViewController : UIViewController <UIWebViewDelegate, CDVScreenOrientationDelegate>{
+@interface CDVInAppBrowserViewController : UIViewController <UIWebViewDelegate>{
     @private
     NSString* _userAgent;
     NSString* _prevUserAgent;
@@ -77,6 +86,9 @@
 @property (nonatomic, strong) IBOutlet UILabel* addressLabel;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem* backButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem* forwardButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem* wishButton;
+@property (nonatomic, copy) NSString* wishButtonTitle;
+@property (nonatomic, copy) NSString* wishButtonWaitTitle;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView* spinner;
 @property (nonatomic, strong) IBOutlet UIToolbar* toolbar;
 
@@ -93,10 +105,3 @@
 - (id)initWithUserAgent:(NSString*)userAgent prevUserAgent:(NSString*)prevUserAgent browserOptions: (CDVInAppBrowserOptions*) browserOptions;
 
 @end
-
-@interface CDVInAppBrowserNavigationController : UINavigationController
-
-@property (nonatomic, weak) id <CDVScreenOrientationDelegate> orientationDelegate;
-
-@end
-
